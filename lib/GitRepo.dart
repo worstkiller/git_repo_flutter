@@ -17,7 +17,7 @@ class GitRepo {
   num score;
 
   GitRepo(
-      this.id,
+      {this.id,
       this.node_id,
       this.name,
       this.full_name,
@@ -30,57 +30,23 @@ class GitRepo {
       this.forks_count,
       this.updated_at,
       this.open_issues_count,
-      this.score);
+      this.score});
 
-  int getId() {
-    return id;
-  }
-
-  String getName() {
-    return name;
-  }
-
-  String getFullName() {
-    return full_name;
-  }
-
-  RepoOwner getOwner() {
-    return owner;
-  }
-
-  String getHtmlUrl() {
-    return html_url;
-  }
-
-  String getDescription() {
-    return description;
-  }
-
-  String getCloneUrl() {
-    return clone_url;
-  }
-
-  int getStargazersCount() {
-    return stargazers_count;
-  }
-
-  String getLanguage() {
-    return language;
-  }
-
-  int getForksCount() {
-    return forks_count;
-  }
-
-  String getUpdatedAt() {
-    return updated_at;
-  }
-
-  int getOpenIssues() {
-    return open_issues_count;
-  }
-
-  num getScore() {
-    return score;
+  factory GitRepo.fromJson(Map<String, dynamic> json) {
+    return new GitRepo(
+        id: json["id"],
+        node_id: json["node_id"],
+        name: json["name"],
+        full_name: json["full_name"],
+        owner: new RepoOwner.fromJson(json["owner"]),
+        html_url: json["html_url"],
+        description: json["description"],
+        clone_url: json["clone_url"],
+        stargazers_count: json["stargazers_count"],
+        language: json["language"],
+        forks_count: json["forks_count"],
+        updated_at: json["updated_at"],
+        open_issues_count: json["open_issues_count"],
+        score: json["score"]);
   }
 }

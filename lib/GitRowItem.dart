@@ -38,7 +38,7 @@ class GitRowItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         new Text(
-                          this.repo.getFullName(),
+                          this.repo.full_name,
                           style: Theme.of(context).textTheme.title,
                         ),
                         new Text(this.repo.language,
