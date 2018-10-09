@@ -11,7 +11,7 @@ class GitRowItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: EdgeInsets.only(left:8.0,top: 8.0,right: 8.0),
         child: Card(
           child: Row(
             mainAxisSize: MainAxisSize.max,
@@ -21,11 +21,15 @@ class GitRowItem extends StatelessWidget {
                 child: Container(
                   margin: EdgeInsets.only(
                       left: 16.0, top: 8.0, bottom: 8.0, right: 8.0),
-                  child: Image.asset(
-                    'assets/application.png',
-                    width: 64.0,
-                    height: 64.0,
-                    fit: BoxFit.cover,
+                  child: Container(
+                    width: 60.0,
+                    height: 60.0,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image:
+                                new NetworkImage(this.repo.owner.avatar_url))),
                   ),
                 ),
                 flex: 0,
@@ -38,40 +42,42 @@ class GitRowItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          this.repo.full_name,
+                          this.repo.name,
                           style: Theme.of(context).textTheme.title,
                         ),
                         Text(
-                            this.repo.language != null
-                                ? this.repo.language
+                            this.repo.owner.login != null
+                                ? this.repo.owner.login
                                 : "",
                             textDirection: TextDirection.ltr,
                             style: Theme.of(context).textTheme.body2),
-                        Text(getParsedFuzzyDate(this.repo.updated_at),
-                            textDirection: TextDirection.ltr,
-                            style: Theme.of(context).textTheme.body1)
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Text(getParsedFuzzyDate(this.repo.updated_at),
+                                textDirection: TextDirection.ltr,
+                                style: Theme.of(context).textTheme.body1),
+                            const SizedBox(width: 150.0),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                Icon(
+                              Icons.favorite,
+                              color: Colors.redAccent,
+                              size: 20.0,
+                            ),
+                            Text(
+                              this.repo.stargazers_count.toString(),
+                              style: Theme.of(context).textTheme.body1,
+                            )],)
+                          ],
+                        )
                       ],
                     )),
                 flex: 2,
               ),
-              Container(
-                margin: EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Icon(
-                      Icons.favorite,
-                      color: Colors.redAccent,
-                      size: 20.0,
-                    ),
-                    Text(
-                      this.repo.stargazers_count.toString(),
-                      style: Theme.of(context).textTheme.body1,
-                    )
-                  ],
-                ),
-              )
             ],
           ),
         ));

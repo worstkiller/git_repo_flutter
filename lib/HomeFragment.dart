@@ -9,11 +9,11 @@ class HomeFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new FutureBuilder<GitRepoResponse>(
-      future: ApiProvider.getTrendingRepo("java", "stars", "desc"),
+      future: ApiProvider.getTrendingRepo("android", "stars", "desc"),
       builder: (BuildContext context, AsyncSnapshot<GitRepoResponse> snapshot) {
         if (snapshot.hasData) {
           return buildGitItemList(snapshot.data);
-        } else if (snapshot.error == null || snapshot.data == null) {
+        } else if (snapshot.hasError) {
           return new Center(
               child: new Padding(
                   padding: new EdgeInsets.all(16.0),
