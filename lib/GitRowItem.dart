@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'GitRepo.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class GitRowItem extends StatelessWidget {
   GitRepo repo;
@@ -58,7 +59,7 @@ class GitRowItem extends StatelessWidget {
                             Text(getParsedFuzzyDate(this.repo.updated_at),
                                 textDirection: TextDirection.ltr,
                                 style: Theme.of(context).textTheme.body1),
-                            const SizedBox(width: 150.0),
+                            const SizedBox(width: 60.0),
                             Row(
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.end,
@@ -86,30 +87,6 @@ class GitRowItem extends StatelessWidget {
   String getParsedFuzzyDate(String dateRaw) {
     // Add a new locale messages
     var date = DateTime.parse(dateRaw);
-    var now = DateTime.now();
-    var diff = now.difference(date);
-
-    var time = '';
-
-    if (diff.inSeconds <= 0 ||
-        diff.inSeconds > 0 && diff.inMinutes == 0 ||
-        diff.inMinutes > 0 && diff.inHours == 0 ||
-        diff.inHours > 0 && diff.inDays == 0) {
-      time = diff.inDays.toString();
-    } else if (diff.inDays > 0 && diff.inDays < 7) {
-      if (diff.inDays == 1) {
-        time = diff.inDays.toString() + ' Day ago';
-      } else {
-        time = diff.inDays.toString() + ' Days ago';
-      }
-    } else {
-      if (diff.inDays == 7) {
-        time = (diff.inDays / 7).floor().toString() + ' Week ago';
-      } else {
-        time = (diff.inDays / 7).floor().toString() + ' Weeks ago';
-      }
-    }
-
-    return time;
+    return timeago.format(date);
   }
 }

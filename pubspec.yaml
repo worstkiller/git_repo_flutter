@@ -2,6 +2,7 @@ name: git_repo_flutter
 description: Git repo for flutter
 
 dependencies:
+  timeago:  2.0.8
 
   flutter:
     sdk: flutter
