@@ -10,18 +10,18 @@ class GitRowItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Padding(
-        padding: new EdgeInsets.all(8.0),
-        child: new Card(
-          child: new Row(
+    return Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Card(
+          child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              new Expanded(
-                child: new Container(
-                  margin: new EdgeInsets.only(
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.only(
                       left: 16.0, top: 8.0, bottom: 8.0, right: 8.0),
-                  child: new Image.asset(
+                  child: Image.asset(
                     'assets/application.png',
                     width: 64.0,
                     height: 64.0,
@@ -30,39 +30,42 @@ class GitRowItem extends StatelessWidget {
                 ),
                 flex: 0,
               ),
-              new Expanded(
-                child: new Container(
-                    margin: new EdgeInsets.all(8.0),
-                    child: new Column(
+              Expanded(
+                child: Container(
+                    margin: EdgeInsets.all(8.0),
+                    child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        new Text(
+                        Text(
                           this.repo.full_name,
                           style: Theme.of(context).textTheme.title,
                         ),
-                        new Text(this.repo.language,
+                        Text(
+                            this.repo.language != null
+                                ? this.repo.language
+                                : "",
                             textDirection: TextDirection.ltr,
                             style: Theme.of(context).textTheme.body2),
-                        new Text(getParsedFuzzyDate(this.repo.updated_at),
+                        Text(getParsedFuzzyDate(this.repo.updated_at),
                             textDirection: TextDirection.ltr,
                             style: Theme.of(context).textTheme.body1)
                       ],
                     )),
                 flex: 2,
               ),
-              new Container(
-                margin: new EdgeInsets.all(8.0),
-                child: new Row(
+              Container(
+                margin: EdgeInsets.all(8.0),
+                child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    new Icon(
+                    Icon(
                       Icons.favorite,
                       color: Colors.redAccent,
                       size: 20.0,
                     ),
-                    new Text(
+                    Text(
                       this.repo.stargazers_count.toString(),
                       style: Theme.of(context).textTheme.body1,
                     )
@@ -77,7 +80,7 @@ class GitRowItem extends StatelessWidget {
   String getParsedFuzzyDate(String dateRaw) {
     // Add a new locale messages
     var date = DateTime.parse(dateRaw);
-    var now = new DateTime.now();
+    var now = DateTime.now();
     var diff = now.difference(date);
 
     var time = '';

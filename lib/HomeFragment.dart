@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'ApiProvider.dart';
-import 'GitRepoResponse.dart';
-import 'GitRowItem.dart';
+import 'package:git_repo_flutter/GitRepoResponse.dart';
+import 'package:git_repo_flutter/GitRowItem.dart';
 import 'dart:async';
 
 class HomeFragment extends StatelessWidget {
@@ -12,7 +12,7 @@ class HomeFragment extends StatelessWidget {
       future: ApiProvider.getTrendingRepo("java", "stars", "desc"),
       builder: (BuildContext context, AsyncSnapshot<GitRepoResponse> snapshot) {
         if (snapshot.hasData) {
-          return buildGitItemList(snapshot.data as GitRepoResponse);
+          return buildGitItemList(snapshot.data);
         } else if (snapshot.error == null || snapshot.data == null) {
           return new Center(
               child: new Padding(
@@ -28,9 +28,11 @@ class HomeFragment extends StatelessWidget {
     );
   }
 
-  Widget buildGitItemList(GitRepoResponse data ) {
-    var listOfItems = <Widget>[];
-    data.items.forEach((gitRpo) => listOfItems.add(new GitRowItem(gitRpo)));
-    return new Column(children: listOfItems);
+  Widget buildGitItemList(GitRepoResponse data) {
+    return new ListView.builder(
+      itemBuilder: (BuildContext context, int index) =>
+          new GitRowItem(data.items[index]),
+      itemCount: data.items.length,
+    );
   }
 }
