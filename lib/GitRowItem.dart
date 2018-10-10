@@ -12,7 +12,7 @@ class GitRowItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.only(left:8.0,top: 8.0,right: 8.0),
+        padding: EdgeInsets.only(left: 8.0, top: 8.0, right: 8.0),
         child: Card(
           child: Row(
             mainAxisSize: MainAxisSize.max,
@@ -56,23 +56,31 @@ class GitRowItem extends StatelessWidget {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Text(getParsedFuzzyDate(this.repo.updated_at),
-                                textDirection: TextDirection.ltr,
-                                style: Theme.of(context).textTheme.body1),
-                            const SizedBox(width: 60.0),
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                Icon(
-                              Icons.favorite,
-                              color: Colors.redAccent,
-                              size: 20.0,
+                            Expanded(
+                              child: Text(
+                                  getParsedFuzzyDate(this.repo.updated_at),
+                                  textDirection: TextDirection.ltr,
+                                  style: Theme.of(context).textTheme.body1),
+                              flex: 3,
                             ),
-                            Text(
-                              this.repo.stargazers_count.toString(),
-                              style: Theme.of(context).textTheme.body1,
-                            )],)
+                            Expanded(
+                              child: Icon(
+                                Icons.favorite,
+                                color: Colors.redAccent,
+                                size: 20.0,
+                              ),
+                              flex: 0,
+                            ),
+                            Expanded(
+                              child: Container(
+                                padding: EdgeInsets.only(left: 4.0),
+                                child: Text(
+                                  this.repo.stargazers_count.toString(),
+                                  style: Theme.of(context).textTheme.body1,
+                                ),
+                              ),
+                              flex: 1,
+                            )
                           ],
                         )
                       ],
