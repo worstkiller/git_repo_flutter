@@ -1,16 +1,16 @@
 import 'GitRepo.dart';
 
 class GitRepoResponse {
-  final int total_count;
-  final bool incomplete_results;
+  final int totalCount;
+  final bool incompleteResults;
   final List<GitRepo> items;
 
-  GitRepoResponse({this.total_count, this.incomplete_results, this.items});
+  GitRepoResponse({this.totalCount, this.incompleteResults, this.items});
 
   factory GitRepoResponse.fromJson(Map<String, dynamic> json) {
     return GitRepoResponse(
-        total_count: json['total_count'],
-        incomplete_results: json["incomplete_results"],
+        totalCount: json['total_count'],
+        incompleteResults: json["incomplete_results"],
         items: List<GitRepo>.from(
             json['items'].map((item) => GitRepo.fromJson(item))));
   }

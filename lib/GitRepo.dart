@@ -2,51 +2,51 @@ import 'RepoOwner.dart';
 
 class GitRepo {
   int id;
-  String node_id;
+  String nodeId;
   String name;
-  String full_name;
+  String fullName;
   RepoOwner owner;
-  String html_url;
+  String htmlUrl;
   String description;
-  String clone_url;
-  int stargazers_count;
+  String cloneUrl;
+  int stargazersCount;
   String language;
-  int forks_count;
-  String updated_at;
-  int open_issues_count;
+  int forksCount;
+  String updatedAt;
+  int openIssuesCount;
   num score;
 
   GitRepo(
       {this.id,
-      this.node_id,
+      this.nodeId,
       this.name,
-      this.full_name,
+      this.fullName,
       this.owner,
-      this.html_url,
+      this.htmlUrl,
       this.description,
-      this.clone_url,
-      this.stargazers_count,
+      this.cloneUrl,
+      this.stargazersCount,
       this.language,
-      this.forks_count,
-      this.updated_at,
-      this.open_issues_count,
+      this.forksCount,
+      this.updatedAt,
+      this.openIssuesCount,
       this.score});
 
   factory GitRepo.fromJson(Map<String, dynamic> json) {
     return new GitRepo(
         id: json["id"],
-        node_id: json["node_id"],
+        nodeId: json["node_id"],
         name: json["name"],
-        full_name: json["full_name"],
+        fullName: json["full_name"],
         owner: new RepoOwner.fromJson(json["owner"]),
-        html_url: json["html_url"],
+        htmlUrl: json["html_url"],
         description: json["description"],
-        clone_url: json["clone_url"],
-        stargazers_count: json["stargazers_count"],
+        cloneUrl: json["clone_url"],
+        stargazersCount: json["stargazers_count"],
         language: json["language"],
-        forks_count: json["forks_count"],
-        updated_at: json["updated_at"],
-        open_issues_count: json["open_issues_count"],
+        forksCount: json["forks_count"],
+        updatedAt: json["updated_at"],
+        openIssuesCount: json["open_issues_count"],
         score: json["score"]);
   }
 }

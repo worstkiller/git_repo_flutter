@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:git_repo_flutter/Utility.dart';
 
 class ApiProvider {
-  static final String API_ENDPOINT =
+  static const String API_ENDPOINT =
       "https://api.github.com/search/repositories";
 
   static Future<GitRepoResponse> getTrendingRepo(
@@ -13,6 +13,7 @@ class ApiProvider {
     var uri = {"q": q, "sort": sort, "order": order};
 
     final response = await http.get(Utility.getUrlEncoded(API_ENDPOINT, uri));
+    print(Utility.getUrlEncoded(API_ENDPOINT, uri));
 
     if (response.statusCode == 200) {
       return GitRepoResponse.fromJson(json.decode(response.body));

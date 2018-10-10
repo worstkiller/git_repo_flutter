@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:git_repo_flutter/GitRepo.dart';
 
 class DetailsFragment extends StatelessWidget {
-  GitRepo gitRepo;
+  final GitRepo gitRepo;
 
-  DetailsFragment(this.gitRepo);
+  DetailsFragment({this.gitRepo});
 
   @override
   Widget build(BuildContext context) {

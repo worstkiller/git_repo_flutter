@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'GitRepo.dart';
-import 'package:timeago/timeago.dart' as timeago;
 import 'package:git_repo_flutter/DetailsFragment.dart';
+import 'package:timeago/timeago.dart' as timeago;
+
+import 'GitRepo.dart';
 
 class GitRowItem extends StatelessWidget {
-  GitRepo repo;
+  final GitRepo repo;
 
-  GitRowItem(GitRepo gitRepsonse) {
-    this.repo = gitRepsonse;
-  }
+  GitRowItem({key, @required this.repo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,7 @@ class GitRowItem extends StatelessWidget {
                             image: DecorationImage(
                                 fit: BoxFit.fill,
                                 image: new NetworkImage(
-                                    this.repo.owner.avatar_url))),
+                                    this.repo.owner.avatarUrl))),
                       ),
                     ),
                     flex: 0,
@@ -61,7 +60,7 @@ class GitRowItem extends StatelessWidget {
                               children: <Widget>[
                                 Expanded(
                                   child: Text(
-                                      getParsedFuzzyDate(this.repo.updated_at),
+                                      getParsedFuzzyDate(this.repo.updatedAt),
                                       textDirection: TextDirection.ltr,
                                       style: Theme.of(context).textTheme.body1),
                                   flex: 3,
@@ -78,7 +77,7 @@ class GitRowItem extends StatelessWidget {
                                   child: Container(
                                     padding: EdgeInsets.only(left: 4.0),
                                     child: Text(
-                                      this.repo.stargazers_count.toString(),
+                                      this.repo.stargazersCount.toString(),
                                       style: Theme.of(context).textTheme.body1,
                                     ),
                                   ),
@@ -102,7 +101,11 @@ class GitRowItem extends StatelessWidget {
   }
 
   openDetailScreen(GitRepo repo, BuildContext context) {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => DetailsFragment(repo)));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => DetailsFragment(
+                  gitRepo: repo,
+                )));
   }
 }

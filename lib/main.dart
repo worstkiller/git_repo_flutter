@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'HomeFragment.dart';
 
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
-  String title = "Git repo";
+  final String title = "Git repo";
 
   @override
   Widget build(BuildContext context) {
